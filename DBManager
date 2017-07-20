@@ -1,8 +1,38 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DBManager{
+	
+	public ArrayList<Student> getAllData() throws Exception {
+		
+			Connection con = 
+					DriverManager.getConnection
+					("jdbc:oracle:thin:@localhost:1521:XE","java07","java07");
+			Statement stat = con.createStatement();
+			ResultSet rs = stat.executeQuery("select * from person");
+			
+			ArrayList<Student> result = new ArrayList<Student>();
+			
+			while(rs.next()) {
+			//next : check data and fetch a line of data.
+				//divide the fetched line
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				String address = rs.getString("address");
+				int kor = rs.getInt("kor");
+				
+				result.add(new Student(id,name,email,address,kor));
+			}
+			
+			con.close();
+			return result;
+	}
+	
 	public int insertData(Student param)throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");//Class.forName("package path");
 
@@ -27,7 +57,7 @@ public class DBManager{
 	}
 	
 	//deleteData
-	public int deleteData(Student param)throws Exception{
+	public int deleteData(int param)throws Exception{
 		Class.forName("oracle.jdbc.driver.OracleDriver");//Class.forName("package path");
 
 		Connection con = 
@@ -38,7 +68,7 @@ public class DBManager{
 		PreparedStatement pstat = 
 				con.prepareStatement(sql);//put query
 		
-		pstat.setInt(1, param.getId());
+		pstat.setInt(1, param);
 		
 		int result = pstat.executeUpdate();
 	
