@@ -1,0 +1,13 @@
+# JDBC
+
+public class Main {
+	public static void main(String[] args) {
+		DBManager manager = new DBManager();
+		
+		try {
+			manager.insertData("person7","lee@naver.com","kor",5);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
