@@ -1,17 +1,27 @@
-# JDBC
 
 public class Main {
 	public static void main(String[] args) {
 		DBManager manager = new DBManager();
 		
+		Student std = new Student(0,"person8","lee@naver.com","kor",5);
+		Student stdD = new Student(1008,"person8","lee@naver.com","kor",5);
 		try {
-			int result = manager.insertData("person7","lee@naver.com","kor",5);
+			int result = manager.insertData(std);
+			int resultD = manager.deleteData(stdD);
 			
 			if(result>0) {
 				System.out.println("success");
 			} else {
 				System.out.println("fail");
 			}
+			
+			if(resultD>0) {
+				System.out.println("success");
+			} else {
+				System.out.println("fail");
+			}
+		
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
