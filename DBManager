@@ -1,0 +1,29 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class DBManager{
+	public void insertData(String name, String email, String address, int kor)throws Exception {
+		Class.forName("oracle.jdbc.driver.OracleDriver");//Class.forName("package path");
+
+		Connection con = 
+				DriverManager.getConnection
+				("jdbc:oracle:thin:@localhost:1521:XE","java07","java07");
+		
+		Statement stat = con.createStatement();//java:statement == oracle:shell
+	
+		String sql = "insert into person values(person_seq.nextval, '"+name+"','"+email+"','"+address+"',"+kor+")";
+		int result = stat.executeUpdate(sql);
+		//executeQuery : for select. return resultSet.
+		//executeUpdate : for insert, delete, update. return integer of query lines. 
+		
+		if(result>0) {
+			System.out.println("success");
+		} else {
+			System.out.println("fail");
+		}
+	
+		con.commit();
+		con.close();
+	}
+}
