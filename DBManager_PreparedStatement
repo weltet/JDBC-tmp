@@ -19,17 +19,7 @@ public class DBManager{
 		pstat.setString(3, address);
 		pstat.setInt(4, kor);
 		int result = pstat.executeUpdate();
-	
-		/*
-		Statement stat = con.createStatement();//java:statement == oracle:shell
-	
-		String sql = "insert into person values(person_seq.nextval, '"+name+"','"+email+"','"+address+"',"+kor+")";
-		int result = stat.executeUpdate(sql);
-		//executeQuery : for select. return resultSet.
-		//executeUpdate : for insert, delete, update. return integer of query lines. 
-		 * 
-		 */
-	
+
 		if(result>0) {
 			System.out.println("success");
 		} else {
