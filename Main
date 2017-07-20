@@ -5,7 +5,14 @@ public class Main {
 		DBManager manager = new DBManager();
 		
 		try {
-			manager.insertData("person7","lee@naver.com","kor",5);
+			int result = manager.insertData("person7","lee@naver.com","kor",5);
+			
+			if(result>0) {
+				System.out.println("success");
+			} else {
+				System.out.println("fail");
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
